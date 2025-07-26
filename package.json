@@ -1,0 +1,25 @@
+{
+  "name": "mcp-server",
+  "version": "1.0.0",
+  "main": "dist/server.ts",
+  "type": "module",
+  "scripts": {
+    "server:build:": "tsc",
+    "server:build:watch:": "tsc --watch",
+    "server:dev": "tsx src/server.ts",
+    "start": "node src/server.js",
+    "dev": "tsx src/server.ts",
+    "server:inspect": "set DANGEROUSLY_OMIT_AUTH=true && npx @modelcontextprotocol/inspector tsx src/server.ts"
+  },
+  "keywords": [],
+  "author": "Namikaze",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "ollama": "^0.5.16"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
