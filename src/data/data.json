@@ -4,5 +4,17 @@
     "name": "asdsad",
     "email": "darunamikaze@gmail.com",
     "ph": "1234567890"
+  },
+  {
+    "uid": "user-uid",
+    "name": "My MCP Server",
+    "email": "user@example.com",
+    "ph": "1234567890"
+  },
+  {
+    "uid": "unique-id-123",
+    "name": "My Smol MCP",
+    "email": "user@example.com",
+    "ph": "1234567890"
   }
 ]

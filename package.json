@@ -1,11 +1,11 @@
 {
   "name": "mcp-server",
   "version": "1.0.0",
-  "main": "dist/server.ts",
+  "main": "build/server.ts",
   "type": "module",
   "scripts": {
-    "server:build:": "tsc",
-    "server:build:watch:": "tsc --watch",
+    "server:build": "tsc",
+    "server:build:watch": "tsc --watch",
     "server:dev": "tsx src/server.ts",
     "start": "node src/server.js",
     "dev": "tsx src/server.ts",

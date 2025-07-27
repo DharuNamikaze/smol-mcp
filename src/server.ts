@@ -2,7 +2,6 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import z from "zod";
 import { promises as fs } from 'node:fs'
-import { callbackify } from "node:util";
 
 const server = new McpServer({
     name: 'smol-mcp',
@@ -23,7 +22,7 @@ async function main() {
 // (name: string, description: string, paramsSchema: Args, annotations: ToolAnnotations, callback: ToolCallback<Args>): RegisteredTool
 
 server.tool("create-schema", "This tool will create a schema",
-    
+
     { uid: z.string(), name: z.string(), email: z.string().email(), ph: z.string().regex(/^[0-9]{10}$/, "Phone number must be 10 digits") },
     { title: "Create User", destructiveHint: false, openWorldHint: true },
     // annotations: ToolAnnotations, these are optional but for learning we are adding it.
@@ -42,10 +41,11 @@ server.tool("create-schema", "This tool will create a schema",
             }
         } catch {
             return {
-                content: [{ type: "text", text: "User can\'t be created! we got error at our side" }]
+                content: [{ type: "text", text: "User can\'t be created! we got error at our side" }],
             }
         }
     }
+
 )
 async function createUser(params: {
     uid: string,
