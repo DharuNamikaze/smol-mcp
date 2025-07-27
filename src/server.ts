@@ -19,20 +19,25 @@ async function main() {
     await server.connect(transport)
 }
 
+// server tool takes 3 to 5 arguements
+// (name: string, description: string, paramsSchema: Args, annotations: ToolAnnotations, callback: ToolCallback<Args>): RegisteredTool
+
 server.tool("create-schema", "This tool will create a schema",
+    
     { uid: z.string(), name: z.string(), email: z.string().email(), ph: z.string().regex(/^[0-9]{10}$/, "Phone number must be 10 digits") },
     { title: "Create User", destructiveHint: false, openWorldHint: true },
-    // above we can have readOnlyHint: false also idempotentHint:false
-    // create is not gona be readonly and it's gonna create the same data for all the user 
-    // but we didnt because the default value is false for both
-    // openworldHint is true because we are gonna touch outside our local codebase ex:mongo,firestore
-    // also these annotations are optional we dont have to explicitly do it but yeah we are building somethng!
+    // annotations: ToolAnnotations, these are optional but for learning we are adding it.
+    // above we can have readOnlyHint: false and idempotentHint:false
+    // but we didnt write it explicitly because the default value is false for both
+    // openworldHint:true because we are gonna touch outside our local codebase ex:mongo,firestore
     async (params) => {
         try {
             const id = await createUser(params)
+            // the actual core of the tool
             return {
                 content: [
                     { type: "text", text: `User ${id} got created successfully!` }
+                    // this returns some context to the llm about what happened when it called the tool
                 ]
             }
         } catch {
@@ -51,14 +56,12 @@ async function createUser(params: {
     try {
         const saveUsers = await import("./data/data.json", {
             with: { type: "json" }
-        }).then(val => val.default)
-
-        saveUsers.push({ ...params })
+        }).then(val => val.default);
+        saveUsers.push({ ...params });
         fs.writeFile("./src/data/data.json", JSON.stringify(saveUsers, null, 2))
         return params.uid;
     } catch {
         throw new Error("Error bro, i think that's enough info. good luck.")
     }
-
 }
 main()
