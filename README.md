@@ -58,6 +58,6 @@ change it to your configuration or take a refernce here
 1. Click the restart to start the server running
 
 2. The output window aside terminal shows the entire conversation between our server and any client
-3. Mention the server file `#your_mcp.json` and the tool `#your_tool`to co-pilot and tada!🎉💃
+3. Mention the server file `#your_mcp.json` and the tool `#your_tool`to copilot and tada!🎉💃
 
 ![alt text](/public/tooloutput.png)

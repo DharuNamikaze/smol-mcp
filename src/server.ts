@@ -18,6 +18,27 @@ async function main() {
     await server.connect(transport)
 }
 
+server.resource("GetLocalUsers", "local://users",
+    {
+        description: "Retrieve all local users from data.json",
+        title: "Local Users",
+        mimeType: "application/json",
+    },
+    // same arguements, we are just giving some context/data/resource to the ai model that access this server
+    async uri => {
+        const users = await import("./data/data.json", { with: { type: "json" } }).then(user => user.default)
+        return {
+            contents: [
+                {
+                    uri: uri.href,
+                    text: JSON.stringify(users),
+                    mimeType: "application/json",
+                },
+            ],
+        }
+    })
+
+
 // server tool takes 3 to 5 arguements
 // (name: string, description: string, paramsSchema: Args, annotations: ToolAnnotations, callback: ToolCallback<Args>): RegisteredTool
 
@@ -64,4 +85,6 @@ async function createUser(params: {
         throw new Error("Error bro, i think that's enough info. good luck.")
     }
 }
+
+
 main()
