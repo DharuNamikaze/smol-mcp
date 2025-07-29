@@ -15,6 +15,7 @@
   "author": "Namikaze",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.0",
+    "axios": "^1.11.0",
     "ollama": "^0.5.16",
     "zod": "^3.25.76"
   },
